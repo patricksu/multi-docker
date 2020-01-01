@@ -3,23 +3,23 @@ services:
   - docker
 
 before_install:
-  - docker build -t patricksu/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t mightcontainer002/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true patricksu/react-test npm test
+  - docker run -e CI=true mightcontainer002/react-test npm test
 
 after_success:
-  - docker build -t patricksu/multi-client ./client
-  - docker build -t patricksu/multi-nginx ./nginx
-  - docker build -t patricksu/multi-server ./server
-  - docker build -t patricksu/multi-worker ./worker
+  - docker build -t mightcontainer002/multi-client ./client
+  - docker build -t mightcontainer002/multi-nginx ./nginx
+  - docker build -t mightcontainer002/multi-server ./server
+  - docker build -t mightcontainer002/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take these images and push them to dockerhub
-  - docker push patricksu/multi-client
-  - docker push patricksu/multi-nginx
-  - docker push patricksu/multi-server
-  - docker push patricksu/multi-worker
+  - docker push mightcontainer002/multi-client
+  - docker push mightcontainer002/multi-nginx
+  - docker push mightcontainer002/multi-server
+  - docker push mightcontainer002/multi-worker
 
 #deploy:
 #  edge: true
